@@ -1,7 +1,7 @@
 #python
 from datetime import date, datetime
 from uuid import UUID
-from typing import Optional
+from typing import Optional, List
 
 #Pydantic
 
@@ -51,3 +51,68 @@ def home():
     return {
         "Twitter API": "Working"
     }
+
+#Path Operators
+## Users
+@app.post(
+    path='/signup',
+    response_model=UserOut,
+    status_code= status.HTTP_201_CREATED,
+    summary="Register User",
+    tags=['Users']
+    )
+def signup():
+    pass
+
+@app.post(
+    path='/login',
+    response_model=UserOut,
+    status_code= status.HTTP_200_OK,
+    summary="Login User",
+    tags=['Users']
+    )
+def login():
+    pass
+
+@app.get(
+    path='/users',
+    response_model=List[UserOut],
+    status_code= status.HTTP_200_OK,
+    summary="Show all Users",
+    tags=['Users']
+    )
+def show_all_users():
+    pass
+
+
+@app.get(
+    path='/users/{user_id}',
+    response_model=UserOut,
+    status_code= status.HTTP_200_OK,
+    summary="Show User",
+    tags=['Users']
+    )
+def show_user(user_id: UUID):
+    pass
+
+@app.delete(
+    path='/users/{user_id}/delete',
+    response_model=UserOut,
+    status_code= status.HTTP_200_OK,
+    summary="Delete User",
+    tags=['Users']
+    )
+def delete_user():
+    pass
+
+@app.put(
+    path='/users/{user_id}/update',
+    response_model=UserOut,
+    status_code= status.HTTP_200_OK,
+    summary="Update User",
+    tags=['Users']
+    )
+def update_user():
+    pass
+
+##Tweets
