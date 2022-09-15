@@ -116,3 +116,52 @@ def update_user():
     pass
 
 ##Tweets
+@app.get(
+    path='/tweets',
+    response_model=List[Tweet],
+    status_code= status.HTTP_200_OK,
+    summary="Show all tweets",
+    tags=['Tweets']
+    )
+def show_all_tweets():
+    pass
+
+@app.post(
+    path='/tweets/post',
+    response_model=Tweet,
+    status_code= status.HTTP_201_CREATED,
+    summary="Post tweet",
+    tags=['Tweets']
+    )
+def post_tweet():
+    pass
+
+@app.get(
+    path='/tweets/{tweet_id}',
+    response_model=Tweet,
+    status_code= status.HTTP_200_OK,
+    summary="Show tweet",
+    tags=['Tweets']
+    )
+def show_tweet():
+    pass
+
+@app.delete(
+    path='/tweets/{tweet_id}/delete',
+    response_model=Tweet,
+    status_code= status.HTTP_200_OK,
+    summary="Delete tweet",
+    tags=['Tweets']
+    )
+def delete_tweet():
+    pass
+
+@app.put(
+    path='/tweets/{tweet_id}/update',
+    response_model=Tweet,
+    status_code= status.HTTP_200_OK,
+    summary="Update tweet",
+    tags=['Tweets']
+    )
+def update_tweet():
+    pass
