@@ -1,5 +1,5 @@
 #python
-from datetime import date
+from datetime import date, datetime
 from uuid import UUID
 from typing import Optional
 
@@ -36,7 +36,11 @@ class UserOut(User):
     birth_day: Optional[date] = Field(default=None)
 
 class Tweet(BaseModel):
-    pass
+    tweet_id: UUID = Field(...)
+    content: str = Field(..., min_length=1, max_length=256)
+    created_at: datetime = Field(default=datetime.now())
+    updated_at: Optional[datetime] = Field(default=None)
+    created_by: UserOut = Field(...)
 
 @app.get(
     path='/',
