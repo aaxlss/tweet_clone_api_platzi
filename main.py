@@ -179,8 +179,33 @@ def show_all_tweets():
     summary="Post tweet",
     tags=['Tweets']
     )
-def post_tweet():
-    pass
+def post_tweet(tweet: Tweet = Body(...)):
+    """
+        Store a new tweet information
+        
+        Parameters
+            -tweet: Tweet
+
+        Returns a json with tweet information
+            -tweet_id: UUID
+            -content: str
+            -created_at: datetime
+            -updated_at: Optional[datetime]
+            -created_by: UserOut
+    """
+    with open('./tweets.json', 'r+', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        tweet_dict = tweet.dict()
+        tweet_dict['tweet_id'] = str(tweet_dict['tweet_id'])
+        tweet_dict['created_at'] = str(tweet_dict['created_at'])
+        tweet_dict['updated_at'] = str(tweet_dict['updated_at'])
+        tweet_dict['created_by']['user_id'] = str(tweet_dict['created_by']['user_id'])
+        tweet_dict['created_by']['birth_day'] = str(tweet_dict['created_by']['birth_day'])
+        results.append(tweet_dict)
+        f.seek(0)
+        f.write(json.dumps(results))
+        
+        return tweet
 
 @app.get(
     path='/tweets/{tweet_id}',
