@@ -20,7 +20,7 @@ class User(BaseModel):
     
     
 class UserIn(User):
-    password: str = Field(..., min_length=8)
+    password: str = Field(..., min_length=8, max_length=50)
 
 class UserOut(User):
     first_name: str = Field(
