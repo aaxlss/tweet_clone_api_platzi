@@ -1,6 +1,7 @@
 #python
 import json
 from datetime import date, datetime
+from unittest import result
 from uuid import UUID
 from typing import Optional, List
 
@@ -114,8 +115,21 @@ def login():
     tags=['Users']
     )
 def show_all_users():
-    pass
+    """
+        This path operation will show all the information of users
+        Parameters: 
 
+        Returns a json list with all the users in the app 
+            -user_id: UUID
+            -email: Emailstr
+            -first_name: str
+            -last_name: str
+            -birth_day: date
+    """
+    with open('./users.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+
+        return results
 
 @app.get(
     path='/users/{user_id}',
